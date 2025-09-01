@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Enroll Student{% endblock %}
+{% block content %}
+<h3>Enroll {{ student.name }}</h3>
+<form method="post">
+  {% csrf_token %}
+  <div class="mb-3">
+    <label for="course" class="form-label">Select Course</label>
+    <select class="form-select" id="course" name="course" required>
+      <option value="">-- choose a course --</option>
+      {% for c in courses %}
+        <option value="{{ c.id }}">{{ c.title }}</option>
+      {% endfor %}
+    </select>
+  </div>
+  <button class="btn btn-primary" type="submit">Enroll</button>
+  <a class="btn btn-secondary" href="{% url 'student_detail' student.id %}">Cancel</a>
+</form>
+{% endblock %}
